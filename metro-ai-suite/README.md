@@ -14,6 +14,7 @@ The Suite also provides a collection of visual analytics sample applications, us
 - [Loitering Detection](loitering-detection): Effortlessly monitor and manage areas with AI-driven video analytics for real-time insights and enhanced security
 - [Image Based Video Search](image-based-video-search): Performs near real-time analysis and image-based search to detect and retrieve objects of interest in large video datasets.
 - [Smart Intersection](smart-intersection): Unified analytics of a traffic intersection.
+- [Smart NVR](smart-nvr): Integrates GenAI-powered vision analytics to a NVR and delivers intelligent, real-time insights from video streams.
 - [Smart Parking](smart-parking): Effortlessly manage parking spaces with AI-driven video analytics for real-time insights and enhanced efficiency.
 - [Visual Search Question and Answering](visual-search-question-and-answering): A unified application that integrates a multi-modal search engine with a visual Q&A assistant.
 
