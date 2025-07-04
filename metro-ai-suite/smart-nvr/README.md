@@ -11,6 +11,7 @@ The Smart NVR is a next-generation network video recorder that integrates GenAI-
 - **Getting Started**
   - [Get Started](docs/user-guide/get-started.md): Step-by-step guide to get started with the sample application.
   - [System Requirements](docs/user-guide/system-requirements.md): Hardware and software requirements for running the sample application.
+  - [How to Use the Application](./docs/user-guide/how-to-use-application.md): Explore the application's features and verify its functionality.
 
 - **Deployment**
   - [How to Build from Source](docs/user-guide/how-to-build-from-source.md): Instructions for building from source code.

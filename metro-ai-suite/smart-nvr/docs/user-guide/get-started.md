@@ -10,6 +10,7 @@ The Smart NVR sample application brings GenAI-powered vision analytics to tradit
 - Install Docker: [Installation Guide](https://docs.docker.com/get-docker/).
 - Enable running docker without "sudo": [Post Install](https://docs.docker.com/engine/install/linux-postinstall/)
 - Install Git: [Installing Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+- Start Frigate NVR by referring to this [guide]()
 
 <!--
 **Setup and First Use**: Include installation instructions, basic operation, and initial validation.
@@ -27,13 +28,46 @@ The Smart NVR sample application brings GenAI-powered vision analytics to tradit
 -->
 
 1. **Clone the Repository**:
-   - Run:
+   - Run the following command to create a local repo.
      ```bash
      git clone https://github.com/open-edge-platform/edge-ai-suites.git
-     cd ./edge-ai-suites/metro-ai-suite/smart-nvr
+     cd edge-ai-suites/metro-ai-suite/smart-nvr
      ```
 
+2. **Setup required environment variables**:
+   - Setup the following environment variables
+     ```bash
+     export FRIGATE_IP=<frigate-ip-address> #IP address of the Frigate VMS (required)
+     export FRIGATE_PORT=<frigate-port> #Port of the Frigate VMS (required, typically 5000)
+     export VSS_IP=<vss-ip-address> #IP address of the Video Search and Summarization service (required)
+     export VSS_PORT=<vss-port> #Port of the Video Search and Summarization service (required, typically 12345)
+     export VLM_MODEL_IP=<vlm-model-end-point-ip-address> #IP address of the VLM Model Endpoint (required)
+     export VLM_MODEL_PORT=<vlm-model-end-point-port> #Port of the VLM Model Endpoint (required, typically 9766)
+     ```
+   - Setup the registry details
+     ```bash
+     export REGISTRY="intel/"
+     ```
 
+3. **Pull images from registry**:
+   
+
+4. **Start the Application**:
+   Start the application using Docker Compose:
+
+   ```bash
+   docker compose up
+   ```
+
+5. **Verify the Application**:
+   Check that the application is running:
+
+   ```bash
+   docker ps
+   ```
+
+6. **Access the Application**:
+   Open a browser and go to `http://<host-ip>:7860` to access the application.
 
 ## Supporting Resources
 - [How to Deploy with Helm](./how-to-deploy-helm.md): How to deploy the application using Helm on a Kubernetes cluster.
