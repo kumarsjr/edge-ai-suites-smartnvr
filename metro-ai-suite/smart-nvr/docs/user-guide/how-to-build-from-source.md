@@ -35,6 +35,8 @@ The script provides an option to start all the required services.
   ```bash
   ./run.sh start
   ```
+The following services will be built as shown in the below screenshot.
+![Services overview](./_images/containers.png)
 
 To stop the application at any point of time, the same script can be used as follows.
   ```bash
