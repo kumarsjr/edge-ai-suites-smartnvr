@@ -19,20 +19,29 @@ This page provides comprehensive support and troubleshooting information for the
 ### 2. Port Conflicts
 - **Issue**: Port conflicts with other running applications.
 - **Solution**: Update the ports section in the Docker Compose file.
+  
+### 3. Description not coming in UI
+- Check logs for frigate container
+- Check if VLM microservice is running and reachable.
 
-## Troubleshooting Docker Deployments
+### 4. Object not getting detected 
+- Check the label in frigate config.yaml for the specific camera
+- Check the top_score parameter 
 
-### 1. Containers Failing To Start:
+## Troubleshooting Docker Containers
+
+### 1. Containers Failing:
    - Check the Docker logs for errors:
      ```bash
-     docker compose logs
+     docker ps
+     docker logs <container-id>
      ```
 ### 2. Port Conflicts:
    - Update the `ports` section in the Compose file to resolve conflicts.
 ### 3. Reset Application:
    - Follow these steps to reset the application to the initial state
      ```bash
-     docker compose down
+     ./setup.sh stop
      docker volume ls | grep nvr-event-router | awk '{ print $2 }' | xargs docker volume rm
      ```
 <!--
