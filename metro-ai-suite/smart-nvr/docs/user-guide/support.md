@@ -12,9 +12,10 @@ This page provides comprehensive support and troubleshooting information for the
 - **Solution**:
 
   ```bash
-  docker compose logs
+  docker ps
+  docker logs <container-id>
   ```
-  Check the logs for errors and resolve dependency issues.
+  Check the logs for errors.
 
 ### 2. Port Conflicts
 - **Issue**: Port conflicts with other running applications.
