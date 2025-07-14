@@ -20,10 +20,11 @@ Open a browser and go to the following endpoints to access the application. Use 
 > - For the best experience, it is recommended to use **Google Chrome**.
 
 ## Verify the Application
-    Once the application is deployed accessing the application will look something like below:
+Once the application is deployed accessing the application will look something like below:
+
 ![Landing page](./_images/Landing-page.png)
 
-#There are three functionalities of this application:
+There are three functionalities of this application:
 
 1. **Summarise/Search** clips which is the above screenshot.
 2. **AI powered event viewer** where we can get a brief summary of the object being detected in the video.
