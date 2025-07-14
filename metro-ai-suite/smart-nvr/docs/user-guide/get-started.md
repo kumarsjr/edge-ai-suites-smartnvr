@@ -52,7 +52,7 @@ The Smart NVR sample application brings GenAI-powered vision analytics to tradit
      export HOST_IP=<host-ip>  # It's the IP address where the NVR Event Router will run
      ```
    
-3. ## Run the application
+3. # Run the application
 The script provides an option to start all the required services.
   ```bash
   ./setup.sh start
