@@ -43,6 +43,9 @@ The Smart NVR sample application brings GenAI-powered vision analytics to tradit
      export VSS_PORT=<vss-port> #Port of the Video Search and Summarization service (required, typically 12345)
      export VLM_MODEL_IP=<vlm-model-end-point-ip-address> #IP address of the VLM Model Endpoint (required)
      export VLM_MODEL_PORT=<vlm-model-end-point-port> #Port of the VLM Model Endpoint (required, typically 9766)
+     export MQTT_USER=<mqtt-user> #Add your mqtt user          
+     export MQTT_PASSWORD=<pwd> #Add your mqtt password
+     export HOST_IP=<host-ip>  # It's the IP address where the NVR Event Router will run
      ```
    - Setup the registry details
      ```bash
@@ -70,5 +73,4 @@ The Smart NVR sample application brings GenAI-powered vision analytics to tradit
    Open a browser and go to `http://<host-ip>:7860` to access the application.
 
 ## Supporting Resources
-- [How to Deploy with Helm](./how-to-deploy-helm.md): How to deploy the application using Helm on a Kubernetes cluster.
 - [How to build from source](./how-to-build-from-source.md): How to build and deploy the application using Docker Compose.

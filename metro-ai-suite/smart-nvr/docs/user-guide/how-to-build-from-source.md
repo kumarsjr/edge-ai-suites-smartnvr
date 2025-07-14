@@ -26,7 +26,7 @@ cd edge-ai-suites/metro-ai-suite/smart-nvr
 ```
 A script is provided to ease the task of building the images as well manage the built images. Run the following command to build the image.
   ```bash
-  source ./build.sh
+  ./build.sh
   ```
 
 ## Run the application
