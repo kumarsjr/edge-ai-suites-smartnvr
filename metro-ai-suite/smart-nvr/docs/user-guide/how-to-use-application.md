@@ -23,6 +23,18 @@ Open a browser and go to the following endpoints to access the application. Use 
 Once the application is deployed accessing the application will look something like below:
 ![Landing page](./_images/Landing-page.png)
 
+There are three functionality of this application:
+1. **Summarise/Search** clips which is the above screenshot.
+2. **AI powered event viewer** where we can get a brief summary of the object being detected in the video.
+
+![AI-events](./_images/AI-events.png)
+
+3. **Auto Route** events where we can create rules as according to our needs.
+
+![Event-router](./_images/Event-router.png)
+
+
+
 ## Resources
 
 - **[Troubleshooting Guide](./support.md)**: Find detailed steps to resolve common issues during deployments.
