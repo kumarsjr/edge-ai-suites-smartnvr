@@ -11,6 +11,8 @@ The Smart NVR sample application brings GenAI-powered vision analytics to tradit
 - Enable running docker without "sudo": [Post Install](https://docs.docker.com/engine/install/linux-postinstall/)
 - Install Git: [Installing Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - Start Frigate NVR by referring to this [guide]()
+- VLM microservice running a device to connect to NVR.
+- VSS running in two devices in search and summary mode.
 
 <!--
 **Setup and First Use**: Include installation instructions, basic operation, and initial validation.
@@ -47,30 +49,26 @@ The Smart NVR sample application brings GenAI-powered vision analytics to tradit
      export MQTT_PASSWORD=<pwd> #Add your mqtt password
      export HOST_IP=<host-ip>  # It's the IP address where the NVR Event Router will run
      ```
-   - Setup the registry details
-     ```bash
-     export REGISTRY="intel/"
-     ```
-
-3. **Pull images from registry**:
    
-
-4. **Start the Application**:
+3. **Start the Application**:
    Start the application using Docker Compose:
 
    ```bash
    docker compose up
    ```
 
-5. **Verify the Application**:
+4. **Verify the Application**:
    Check that the application is running:
 
    ```bash
    docker ps
    ```
 
-6. **Access the Application**:
+5. **Access the Application**:
    Open a browser and go to `http://<host-ip>:7860` to access the application.
+
+> **Note**: Users are advised to use the build process mentioned below for this release which uses a build script which directly builds the containers.
+
 
 ## Supporting Resources
 - [How to build from source](./how-to-build-from-source.md): How to build and deploy the application using Docker Compose.
