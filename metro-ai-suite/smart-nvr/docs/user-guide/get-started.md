@@ -71,5 +71,5 @@ The following services will be built as shown in the below screenshot.
   ```
 
 ## Supporting Resources
-> **Note**: Users are advised to use the build process mentioned below for this release which uses a build script which directly builds the containers.
+> **Note**: Users are advised to use the build process mentioned below for this release which uses a build script which directly builds the images.
 - [How to build from source](./how-to-build-from-source.md): How to build and deploy the application using Docker Compose.

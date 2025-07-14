@@ -1,11 +1,9 @@
-# Build and Deploy Using Docker Compose
+# Build and Deploy Using Script
 
-This guide provides step-by-step instructions to build and deploy the Smart NVR Sample Application using Docker Compose. You'll learn how to:
+This guide provides step-by-step instructions to build the Smart NVR Sample Application using script. You'll learn how to:
 - Build the required images for the application.
 - Start the application and ensure all services are running.
 - Verify the deployment to confirm the application is functioning correctly.
-
-Docker Compose simplifies the deployment process by managing multiple containers as a single application. For more details, see [Docker Compose Documentation](https://docs.docker.com/compose/).
 
 ## Setup the environment variables
 - Setup the following environment variables
@@ -29,11 +27,12 @@ Clone the repository if not already done.
 git clone https://github.com/open-edge-platform/edge-ai-suites.git
 cd edge-ai-suites/metro-ai-suite/smart-nvr
 ```
-A script is provided to ease the task of building the images as well manage the built images. Run the following command to build the image.
+A script is provided to ease the task of building the images as well manage the built images. Run the following command to build the images. This will initiate building process of the required images:
   ```bash
   ./build.sh
   ```
 
 ## What to Do Next
-- **[Troubleshooting Docker Deployments](./support.md#troubleshooting-docker-deployments)**: Find detailed steps to resolve common issues during Docker deployments.
 - **[Get Started](./get-started.md)**: Ensure you have completed the initial setup steps before proceeding.
+- **[Troubleshooting Docker Deployments](./support.md#troubleshooting-docker-deployments)**: Find detailed steps to resolve common issues during Docker deployments.
+

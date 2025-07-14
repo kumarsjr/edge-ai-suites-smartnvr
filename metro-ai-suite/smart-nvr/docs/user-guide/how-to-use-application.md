@@ -20,10 +20,11 @@ Open a browser and go to the following endpoints to access the application. Use 
 > - For the best experience, it is recommended to use **Google Chrome**.
 
 ## Verify the Application
-Once the application is deployed accessing the application will look something like below:
+    Once the application is deployed accessing the application will look something like below:
 ![Landing page](./_images/Landing-page.png)
 
-There are three functionality of this application:
+#There are three functionalities of this application:
+
 1. **Summarise/Search** clips which is the above screenshot.
 2. **AI powered event viewer** where we can get a brief summary of the object being detected in the video.
 
@@ -39,4 +40,4 @@ There are three functionality of this application:
 
 - **[Troubleshooting Guide](./support.md)**: Find detailed steps to resolve common issues during deployments.
 - **[Get Started](./get-started.md)**: Ensure you have completed the initial setup steps.
-- **[Deploy Using Script](./how-to-build-from-source.md)**: Ensure you have used Docker Compose to quickly set up and run the application in a containerized environment.
+- **[Deploy Using Script](./how-to-build-from-source.md)**: Ensure you have built and deployed the application 
