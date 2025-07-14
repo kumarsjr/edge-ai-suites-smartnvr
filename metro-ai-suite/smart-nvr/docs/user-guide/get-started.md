@@ -10,9 +10,9 @@ The Smart NVR sample application brings GenAI-powered vision analytics to tradit
 - Install Docker: [Installation Guide](https://docs.docker.com/get-docker/).
 - Enable running docker without "sudo": [Post Install](https://docs.docker.com/engine/install/linux-postinstall/)
 - Install Git: [Installing Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-- Start Frigate NVR by referring to this [guide]()
 - VLM microservice running a device to connect to NVR.
 - VSS running in two devices in search and summary mode.
+- Containers built using [How to build from source](./how-to-build-from-source.md)
 
 <!--
 **Setup and First Use**: Include installation instructions, basic operation, and initial validation.
@@ -60,21 +60,16 @@ The script provides an option to start all the required services.
 The following services will be built as shown in the below screenshot.
 ![Services overview](./_images/containers.png)
 
-To stop the application at any point of time, the same script can be used as follows.
-  ```bash
-  ./setup.sh stop
-  ```
 
-Verify the Application: Check that the application is running:
-```bash
-docker compose ps
-``` ```
 
 4. **Access the Application**:
    Open a browser and go to `http://<host-ip>:7860` to access the application.
 
-> **Note**: Users are advised to use the build process mentioned below for this release which uses a build script which directly builds the containers.
-
+5. To stop the application at any point of time, the same script can be used as follows.
+  ```bash
+  ./setup.sh stop
+  ```
 
 ## Supporting Resources
+> **Note**: Users are advised to use the build process mentioned below for this release which uses a build script which directly builds the containers.
 - [How to build from source](./how-to-build-from-source.md): How to build and deploy the application using Docker Compose.
