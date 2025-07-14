@@ -24,11 +24,10 @@ Clone the repository if not already done.
 git clone https://github.com/open-edge-platform/edge-ai-suites.git
 cd edge-ai-suites/metro-ai-suite/smart-nvr
 ```
-
 A script is provided to ease the task of building the images as well manage the built images. Run the following command to build the image.
-```bash
-./setup.sh build
-```
+  ```bash
+  ./build.sh
+  ```
 
 ## Run the application
 The script provides an option to start all the required services.
