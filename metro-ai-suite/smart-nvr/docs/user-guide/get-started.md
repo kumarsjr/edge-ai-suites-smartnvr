@@ -41,8 +41,10 @@ The Smart NVR sample application brings GenAI-powered vision analytics to tradit
      ```bash
      export FRIGATE_IP=<frigate-ip-address> #IP address of the Frigate VMS (required)
      export FRIGATE_PORT=<frigate-port> #Port of the Frigate VMS (required, typically 5000)
-     export VSS_IP=<vss-ip-address> #IP address of the Video Search and Summarization service (required)
-     export VSS_PORT=<vss-port> #Port of the Video Search and Summarization service (required, typically 12345)
+     export VSS_SUMMARY_IP=<vss-ip-address> #IP address of the Video Summarization service (required)
+     export VSS_SUMMARY_PORT=<vss-port> #Port of the Video Summarization service (required, typically 12345)
+     export VSS_SEARCH_IP=<vss-ip-address> #IP address of the Video Search service (required)
+     export VSS_SEARCH_PORT=<vss-port> #Port of the Video Search service (required, typically 12345)
      export VLM_MODEL_IP=<vlm-model-end-point-ip-address> #IP address of the VLM Model Endpoint (required)
      export VLM_MODEL_PORT=<vlm-model-end-point-port> #Port of the VLM Model Endpoint (required, typically 9766)
      export MQTT_USER=<mqtt-user> #Add your mqtt user          
@@ -50,21 +52,25 @@ The Smart NVR sample application brings GenAI-powered vision analytics to tradit
      export HOST_IP=<host-ip>  # It's the IP address where the NVR Event Router will run
      ```
    
-3. **Start the Application**:
-   Start the application using Docker Compose:
+3. ## Run the application
+The script provides an option to start all the required services.
+  ```bash
+  ./setup.sh start
+  ```
+The following services will be built as shown in the below screenshot.
+![Services overview](./_images/containers.png)
 
-   ```bash
-   docker compose up
-   ```
+To stop the application at any point of time, the same script can be used as follows.
+  ```bash
+  ./setup.sh stop
+  ```
 
-4. **Verify the Application**:
-   Check that the application is running:
+Verify the Application: Check that the application is running:
+```bash
+docker compose ps
+``` ```
 
-   ```bash
-   docker ps
-   ```
-
-5. **Access the Application**:
+4. **Access the Application**:
    Open a browser and go to `http://<host-ip>:7860` to access the application.
 
 > **Note**: Users are advised to use the build process mentioned below for this release which uses a build script which directly builds the containers.

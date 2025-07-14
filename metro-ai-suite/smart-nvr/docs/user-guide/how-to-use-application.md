@@ -39,4 +39,4 @@ There are three functionality of this application:
 
 - **[Troubleshooting Guide](./support.md)**: Find detailed steps to resolve common issues during deployments.
 - **[Get Started](./get-started.md)**: Ensure you have completed the initial setup steps.
-- **[Deploy Using Docker Compose](./how-to-build-from-source.md)**: Ensure you have used Docker Compose to quickly set up and run the application in a containerized environment.
+- **[Deploy Using Script](./how-to-build-from-source.md)**: Ensure you have used Docker Compose to quickly set up and run the application in a containerized environment.
