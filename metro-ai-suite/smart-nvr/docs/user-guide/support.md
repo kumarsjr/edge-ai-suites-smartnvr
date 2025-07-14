@@ -44,32 +44,6 @@ This page provides comprehensive support and troubleshooting information for the
      docker compose down
      docker volume ls | grep vms-event-router | awk '{ print $2 }' | xargs docker volume rm
      ```
-## Troubleshooting Helm Deployments
-
-### 1. Helm Chart Not Found:
-
-   - Check if the Helm repository was added:
-
-     ```bash
-     helm repo list
-     ```
-
-### 2. Pods Not Running:
-
-   - Review pod logs:
-
-     ```bash
-     kubectl logs {{pod-name}} -n {{namespace}}
-     ```
-
-### 3. Service Unreachable:
-
-   - Confirm the service configuration:
-
-     ```bash
-     kubectl get svc -n {{namespace}}
-     ```
-
 <!--
 ## Support
 - **Developer Forum**: Join the community forum
