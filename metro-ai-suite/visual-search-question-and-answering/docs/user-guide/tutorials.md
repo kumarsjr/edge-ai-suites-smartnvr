@@ -11,7 +11,7 @@ These tutorials demonstrate how to use the Visual Search and QA reference implem
 
 In this tutorial, you will learn how to use your own dataset for searching.
 
-### Learning Objectives
+**Learning objectives**
 
 -   By the end of this tutorial, you will be able to ingest your own dataset to vector DB and conduct search and QA based on them.
 
@@ -32,7 +32,7 @@ In this tutorial, you will learn how to use your own dataset for searching.
 
 2.  Go to the web UI, fill in `file directory on host` with the absolute path to your dataset directory, and click `UpdateDB`
 
-### Summary
+**Summary**
 
 In this tutorial, you learned how to use your own dataset for searching.
 
@@ -40,7 +40,7 @@ In this tutorial, you learned how to use your own dataset for searching.
 
 In this tutorial, you will learn how to ingest data along with metadata to support filtered search
 
-### Learning Objectives
+**Learning objectives**
 
 -   By the end of this tutorial, you will be able to ingest data with metadata by providing matched metadata json file for each media data file in the `file directory on host` used for updating DB
 -   By the end of this tutorial, you will be able to manually ingest single data file with specified metadata using dataprep microservice API
@@ -132,7 +132,7 @@ Figure 2: Search with filter
 -    Any string key-value pair: for example, {"camera": "camera_1"}, {"city": "Shanghai"}, {"location": "front_door"} etc. The rule for such filters is that the values must match with the entities meta in DB
 -    `timestamp_start` and `timestamp_end`: a range of timestamp, should be integers, such as UNIX timestamp or date in YYYYMMDD format 
 
-### Summary
+**Summary**
 
 In this tutorial, you learned how to: ingest data with metadata (both via providing a json file or via API), and search with filters enabled
 
@@ -141,7 +141,7 @@ In this tutorial, you learned how to: ingest data with metadata (both via provid
 
 In this tutorial, you will learn how to adjust the configuarable parameters for the application
 
-### Learning Objectives
+**Learning objectives**
 
 -   By the end of this tutorial, you will be able to know which parameters to modify when needed
 
