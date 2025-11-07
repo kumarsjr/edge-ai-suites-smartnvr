@@ -11,7 +11,7 @@
 - Unit Testing: Added comprehensive unit test cases to improve reliability and maintainability.
 
 **Known Issues**
-- Scenescape Integration Limitation: Scenescape integration is currently not supported when deploying via Helm charts.
+- Scenescape Integration Limitation: Scenescape integration is currently not supported when deploying via Helm charts and when running auto route events in scenescape mode, frigate rules will not work.
 - EMF and EMT are not supported yet.
 - The **AI-Powered Event Viewer** feature relies on Frigate GenAI features, which may exhibit instability or bugs, impacting event data processing reliability.
 
