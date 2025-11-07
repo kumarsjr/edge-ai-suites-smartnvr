@@ -77,8 +77,6 @@ export SCENESCAPE_THROTTLE_INTERVAL=2.0  # Optional: throttle interval in second
 ./setup.sh restart
 ```
 
-**Note:** The setup script automatically copies Scenescape certificates from Smart Intersection if available. If certificates are missing, setup will fail with an error message.
-
 ### Step 4: Verify Integration
 
 Check logs to confirm Scenescape connection:
@@ -105,7 +103,7 @@ When Scenescape is enabled (`NVR_SCENESCAPE=true`) and scenescape source is sele
 
 ![Frigate Selected Interface](_images/Scenescape_enabled_frigate.png)
 
-When Scenescape is enabled but frigate source is selected:
+When Scenescape is enabled but frigate source is selected(Currently frigate object detection is disabled):
 - Source dropdown still shows both **"frigate"** and **"scenescape"** options  
 - **Count** field is automatically hidden (not applicable for frigate)
 - Standard frigate rule configuration with detection labels
