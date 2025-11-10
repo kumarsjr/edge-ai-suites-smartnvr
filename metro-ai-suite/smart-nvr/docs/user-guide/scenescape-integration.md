@@ -20,10 +20,8 @@ Smart NVR system integrates with Intel Scenescape to enable:
 # Clone smart intersection repository inside smart nvr directory if not already done
 git clone https://github.com/open-edge-platform/edge-ai-suites.git -b v1.2.0
 
-# From the Smart NVR directory, copy the DLStreamer configuration (enables RTSP streaming)
+# From the Smart NVR directory, copy the required configuration files to Smart Intersection repo.
 cp ./resources/si-rtsp-config.json edge-ai-suites/metro-ai-suite/metro-vision-ai-app-recipe/smart-intersection/src/dlstreamer-pipeline-server/config.json
-
-# Copy the SceneScape compose configuration
 cp ./resources/compose-scenescape-rtsp.yml edge-ai-suites/metro-ai-suite/metro-vision-ai-app-recipe/compose-scenescape.yml
 ```
 
@@ -50,7 +48,6 @@ These files provide:
 ### Step 1: Get MQTT Credentials
 
 ```bash
-# Get MQTT credentials from Smart Intersection
 cat edge-ai-suites/metro-ai-suite/metro-vision-ai-app-recipe/smart-intersection/src/secrets/browser.auth
 # Expected: {"user": "<user>", "password": "<password>"}
 ```
@@ -103,23 +100,12 @@ When Scenescape is enabled (`NVR_SCENESCAPE=true`) and scenescape source is sele
 
 ![Frigate Selected Interface](_images/Scenescape_enabled_frigate.png)
 
-When Scenescape is enabled but frigate source is selected(Currently frigate object detection is disabled):
+When Scenescape is enabled but frigate source is selected(Currently frigate object detection is disabled in this mode):
 - Source dropdown still shows both **"frigate"** and **"scenescape"** options  
 - **Count** field is automatically hidden (not applicable for frigate)
 - Standard frigate rule configuration with detection labels
 - Rules table shows "Count" column but displays "-" for frigate rules
 - Full frigate functionality remains available
-
-### With Scenescape Completely Disabled (`NVR_SCENESCAPE=false`)
-
-![Scenescape Disabled Interface](_images/Scenescape_disabled.png)
-
-When Scenescape is disabled in environment variables:
-- Source dropdown shows **only** "frigate" option
-- Count field is never visible
-- Rules table **excludes** the "Count" column entirely  
-- Pure frigate-only functionality and interface
-- Scenescape MQTT client will not start
 
 ## Auto-Route Events Configuration
 
