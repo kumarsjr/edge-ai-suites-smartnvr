@@ -100,7 +100,8 @@ When Scenescape is enabled (`NVR_SCENESCAPE=true`) and scenescape source is sele
 
 ![Frigate Selected Interface](_images/Scenescape_enabled_frigate.png)
 
-When Scenescape is enabled but frigate source is selected(Currently frigate object detection is disabled in this mode):
+When Scenescape is enabled but frigate source is selected:
+- Currently frigate object detection is disabled in this mode
 - Source dropdown still shows both **"frigate"** and **"scenescape"** options  
 - **Count** field is automatically hidden (not applicable for frigate)
 - Standard frigate rule configuration with detection labels
