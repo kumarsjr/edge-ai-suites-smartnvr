@@ -36,6 +36,7 @@ smartclassroom\Scripts\activate
 cd smart-classroom
 python.exe -m pip install --upgrade pip
 pip install --upgrade -r requirements.txt
+pip install py-cpuinfo
 ```
 
 
@@ -173,13 +174,3 @@ If you changed the port, adjust the URL accordingly.
   ```
   
   Delete the models folder from `edge-ai-suites/education-ai-suite/smart-classroom/models` and try again.
-
-## Uninstall the Application
-
-To uninstall the application, follow these steps:
-
-1. **Delete the Python virtual environment folder:**
-   Navigate to the directory and remove *education-ai-suite/smartclassroom*
-2. **Remove the models directory:**
-   Remove the models folder located under *education-ai-suite/smart-classroom*.
-
