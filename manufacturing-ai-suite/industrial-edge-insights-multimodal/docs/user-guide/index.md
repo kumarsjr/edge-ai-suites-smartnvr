@@ -1,46 +1,40 @@
 # Industrial Edge Insights - Multimodal
 
-MultiModal Weld Defect Detection sample application demonstrates how to use AI
-at the edge to identify defects in manufacturing environments by analyzing both
-image and time series sensor data.
+MultiModal sample apps demonstrate how to use AI at the edge to identify defects in manufacturing environments by analyzing both image and time series sensor data.
 
-By combining results from image-based defect detection and time series anomaly
-detection using logical "AND" or "OR" operations, the system provides:
+In industrial quality is critical for safety and reliability. Manual inspections are time-consuming and prone to human error. Our solutions leverage deep learning models to automate defect detection, improving accuracy and efficiency.
 
-- more robust and accurate identification of potential defects,
-- enhances reliability, reduces false positives, and supports smarter
-  decision-making for maintenance,
-- helps manufacturers enhance product quality, reduce inspection time, and
-  minimize costly rework by enabling proactive defect detection on the
-  factory floor.
+Key features include:
 
-Industrial quality relies on safety and reliability and manual inspections
-are time-consuming and prone to human error. Therefore, we have developed the
-application to leverage deep learning models to automate defect detection,
-improving both accuracy and efficiency.
+- Multi-modal data fusion: Combines visual inspection (images) and sensor data (such as current, voltage, and temperature)
+  for comprehensive defect detection.
+- Real-time inference: Processes data at the edge for immediate feedback and reduced latency.
+- Configurable alerts: Notifies operators of detected defects to enable timely intervention.
+- Extensible pipeline: Supports integration with additional data sources and models.
 
-**Key features include:**
+Applications such as [Weld Defect Detection](./weld-defect-detection/Overview.md) help manufacturers enhance product quality, reduce inspection time, and minimize costly rework by enabling proactive defect detection on the factory floor.
 
-- Multi-modal data fusion: Combines visual inspection (images) and sensor data
-  (such as current, voltage, and temperature) for comprehensive defect detection.
-- Real-time inference: Processes data at the edge for immediate feedback and
-  reduced latency.
-- Configurable alerts: Notifies operators of detected defects to enable
-  timely intervention.
-- Extensible pipeline: Supports integration with additional data sources
-  and models.
+<!--hide_directive
+::::{grid} 1 2 3 4
+:::{grid-item-card} Weld Defect Detection
+:class-card: homepage-card-container-big
+:link: ./weld-defect-detection/Overview.html
 
-[The application](./weld-defect-detection/index.md) utilizes camera-based
-visual inspection and sensor data analysis to identify anomalies in welding data.
+Multimodal, real-time monitoring of weld defects.
+:::
+::::
+hide_directive-->
 
 <!--hide_directive
 :::{toctree}
 :hidden:
 
-get-started
-system-requirements
-weld-defect-detection/index
-how-to-guides/index
-release_notes/Overview.md
+weld-defect-detection/how-it-works.md
+weld-defect-detection/system-requirements.md
+weld-defect-detection/get-started.md
+weld-defect-detection/how-to-build-from-source.md
+weld-defect-detection/how-to-configure-alerts.md
+weld-defect-detection/how-to-update-config.md
+weld-defect-detection/release_notes/Overview.md
 :::
 hide_directive-->
