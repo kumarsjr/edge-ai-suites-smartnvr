@@ -97,9 +97,9 @@ Update or edit the values in YAML file as follows:
 | `frigate.env.FRIGATE_MQTT_PASSWORD` | Password for mqtt | `<your-mqtt-password>` |
 | `frigate.env.OPENAI_BASE_URL` | Needed when NVR_GENAI flag is set to true | `<your-open-ai-base-url>` |
 | `frigate.env.OPENAI_API_KEY` | Needed when NVR_GENAI flag is set to true | `<your-open-ai-api-key>` |
-| `nvr-event-router.env.VSS_SEARCH_IP` | VSS Search IP | `<your-vss-search-ip>` |
+| `nvr-event-router.env.VSS_SEARCH_IP` | VSS Search IP | `http://<your-vss-search-ip>` |
 | `nvr-event-router.env.VSS_SEARCH_PORT` | VSS Search port | `<your-vss-search-port>` |
-| `nvr-event-router.env.VSS_SUMMARY_IP` | VSS summary IP | `<your-vss-summary-ip>` |
+| `nvr-event-router.env.VSS_SUMMARY_IP` | VSS summary IP | `http://<your-vss-summary-ip>` |
 | `nvr-event-router.env.VSS_SUMMARY_PORT` | VSS summary port | `<your-vss-summary-port>` |
 | `nvr-event-router-ui.NVR_GENAI` | Flag to enable GENAI on Frigate NVR  | `true/false` |
 
