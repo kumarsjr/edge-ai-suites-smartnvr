@@ -6,7 +6,7 @@ authors = ["Your Name <you@example.com>"]
 packages = [{ include = "src" }, { include = "ui" }]
 
 [tool.poetry.dependencies]
-python = ">=3.11,<3.13"
+python = ">=3.10,<3.13"
 watchdog = "==4.0.0"
 fastapi = "==0.115.5"
 uvicorn = {version = "0.29.0", extras = ["standard"]}
