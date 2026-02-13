@@ -35,5 +35,6 @@ To build the Docker image for `Live Video Alert` application, follow these steps
 
 
 Notes:
-- Ensure your environment variables are configured, especially `RTSP_URL`.
+- All environment variables are optional. Streams can be added via the web UI after startup.
+- For model configuration examples (e.g., using InternVL2-2B instead of default Phi-3.5), see the [Get Started](./get-started.md) guide.
 - The default port is `9000`, but can be changed using the `PORT` environment variable.
