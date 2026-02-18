@@ -12,15 +12,24 @@ services:
     command: sh -c "chown -R 5000:5000 /models && chmod -R 755 /models"
 
   ovms:
-    image: openvino/model_server:2025.4.1
+    image: openvino/model_server:latest-gpu
     container_name: ovms-vlm
-    user: "5000:5000" 
     restart: unless-stopped
     depends_on:
       ovms-init:
         condition: service_completed_successfully
     ports:
       - "8000:8000"
+    devices:
+      - /dev/dri:/dev/dri
+    group_add:  # render group for Ubuntu 20.04/22.04/24.04
+      - "109"
+      - "110"
+      - "992"
+    device_cgroup_rules:
+      - 'c 189:* rmw'
+      - 'c 209:* rmw'
+      - 'a 189:* rwm'
     environment:
       - no_proxy=${no_proxy},localhost
       - NO_PROXY=${no_proxy},localhost
@@ -46,6 +55,8 @@ services:
       - "text_generation"
       - --pipeline_type
       - "VLM"
+      - --target_device
+      - "CPU"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/v1/config"]
       interval: 10s

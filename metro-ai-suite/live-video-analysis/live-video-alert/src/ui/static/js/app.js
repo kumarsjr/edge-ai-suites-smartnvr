@@ -739,7 +739,19 @@ function processMetrics(metrics) {
                 break;
             case 'nvidia_smi':
             case 'gpu':
-                const gpuUsage = metric.fields?.utilization_gpu || metric.fields?.usage_percent || 0;
+            case 'gpu_engine_usage':
+            case 'gpu_engine_usage_usage':
+                let gpuUsage = null;
+                if (metric.name === 'gpu_engine_usage' || metric.name === 'gpu_engine_usage_usage') {
+                    // Intel GPU: compute engine only
+                    if (metric.tags?.engine === 'compute' || metric.tags?.type === 'compute') {
+                        gpuUsage = metric.fields?.usage || 0;
+                    } else {
+                        break;  // Skip non-compute engines
+                    }
+                } else {
+                    gpuUsage = metric.fields?.utilization_gpu || metric.fields?.usage_percent || 0;
+                }
                 if (gpuUsage != null) {
                     const gpuVal = document.getElementById('metrics-gpu-val');
                     if (gpuVal) gpuVal.textContent = parseFloat(gpuUsage).toFixed(1) + '%';
