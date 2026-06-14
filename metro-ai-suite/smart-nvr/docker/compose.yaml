@@ -80,6 +80,7 @@ services:
       NVR_SCENESCAPE: ${NVR_SCENESCAPE}
       SCENESCAPE_MQTT_BROKER: ${SCENESCAPE_MQTT_BROKER:-${HOST_IP}}
       SCENESCAPE_MQTT_PORT: ${SCENESCAPE_MQTT_PORT:-1883}
+      SI_NODES_JSON: ${SI_NODES_JSON:-}
 
   nvr-event-router-ui:
     container_name: nvr-event-router-ui

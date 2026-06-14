@@ -317,6 +317,90 @@ stop_services() {
 
 # ─── Remote mode: distributed node deployment ────────────────────────────
 
+register_si_nodes() {
+    local conf="./si-nodes.conf"
+    if [[ -f "$conf" ]]; then
+        print_info "Existing SI nodes:"
+        awk -F'|' '!/^#/{printf "  %s: %s:%s\n", $1, $2, $3}' "$conf"
+        read -rp "Reuse? [Y/n] " ans
+        [[ "$ans" =~ ^[Nn]$ ]] || return 0
+    fi
+    local n; read -rp "Number of SI nodes [1-10]: " n
+    [[ "$n" =~ ^([1-9]|10)$ ]] || { print_error "Enter 1-10"; return 1; }
+    printf '# node_id|mqtt_host|mqtt_port|rtsp_host|rtsp_port\n' > "$conf"
+    for i in $(seq 1 "$n"); do
+        local ip; read -rp "SI node si${i} IP: " ip
+        printf 'si%d|%s|1883|%s|8554\n' "$i" "$ip" "$ip" >> "$conf"
+    done
+    print_success "Saved $n SI node(s) to $conf"
+}
+
+generate_frigate_config() {
+    local conf="./si-nodes.conf" out="./resources/frigate-config/config.yml"
+    cat > "$out" <<'EOF'
+mqtt:
+  enabled: true
+  host: mqtt-broker
+  port: 1883
+  topic_prefix: frigate
+  client_id: frigate
+  user: '{FRIGATE_MQTT_USER}'
+  password: '{FRIGATE_MQTT_PASSWORD}'
+
+logger:
+  default: info
+
+detect:
+  enabled: false
+
+snapshots:
+  enabled: false
+
+record:
+  enabled: true
+  retain:
+    days: 1
+    mode: all
+
+cameras:
+EOF
+    while IFS='|' read -r nid _ _ rh rp; do
+        for cam in 1 2 3 4; do
+            cat >> "$out" <<CAM
+  ${nid}-camera${cam}:
+    ffmpeg:
+      inputs:
+        - path: rtsp://${rh}:${rp}/camera${cam}
+          input_args: preset-rtsp-generic
+          roles: [record]
+      output_args:
+        record: -f segment -segment_time 10 -segment_format mp4 -reset_timestamps 1 -strftime 1 -c:v copy -movflags +faststart
+    detect: {enabled: false}
+    motion: {enabled: false}
+    snapshots: {enabled: false}
+    record:
+      enabled: true
+      retain: {days: 1, mode: all}
+
+CAM
+        done
+    done < <(grep -v '^#' "$conf")
+    echo 'version: 0.15-1' >> "$out"
+}
+
+build_si_nodes_json() {
+    python3 - <<'PY'
+import json
+nodes = []
+for line in open('./si-nodes.conf'):
+    line = line.strip()
+    if not line or line.startswith('#'): continue
+    nid, mh, mp, rh, rp = (f.strip() for f in line.split('|'))
+    nodes.append({"node_id": nid, "mqtt_host": mh, "mqtt_port": int(mp), "rtsp_host": rh, "rtsp_port": int(rp)})
+print(json.dumps(nodes))
+PY
+}
+
 start_si_services() {
     print_header "Starting SI (System 1 / SI-only mode)"
     if [ "${NVR_SCENESCAPE}" != "True" ] && [ "${NVR_SCENESCAPE}" != "true" ]; then
@@ -391,50 +475,19 @@ stop_si_services() {
 
 start_nvr_services() {
     print_header "Starting SmartNVR (System 2 / NVR-only mode)"
-    if [ "${NVR_SCENESCAPE}" != "True" ] && [ "${NVR_SCENESCAPE}" != "true" ]; then
-        print_error "start-nvr requires NVR_SCENESCAPE=true"
-        print_info "Run: export NVR_SCENESCAPE=true"
-        return 1
-    fi
-    HOST_IP=$(get_host_ip)
-    export HOST_IP
-
-    if [ -z "${SCENESCAPE_MQTT_BROKER}" ]; then
-        print_error "SCENESCAPE_MQTT_BROKER is required in NVR-only mode."
-        print_info "Set it to System 1's IP: export SCENESCAPE_MQTT_BROKER=<system1_ip>"
-        return 1
-    fi
-
-    if [ -z "${RTSP_STREAM_HOST}" ]; then
-        print_error "RTSP_STREAM_HOST is required in NVR-only mode."
-        print_info "Set it to System 1's IP: export RTSP_STREAM_HOST=<system1_ip>"
-        return 1
-    fi
-
-    if ! validate_environment; then
-        print_error "Environment validation failed. Please set the required variables."
-        return 1
-    fi
-
-    if ! SCENESCAPE_NVR_ONLY=true configure_scenescape_setup; then
-        return 1
-    fi
-
-    if ! configure_genai_setup; then
-        return 1
-    fi
-
+    [[ "${NVR_SCENESCAPE}" =~ ^[Tt]rue$ ]] || { print_error "start-nvr requires NVR_SCENESCAPE=true"; return 1; }
+    HOST_IP=$(get_host_ip); export HOST_IP
+    validate_environment || return 1
+    register_si_nodes || return 1
+    generate_frigate_config || return 1
+    SI_NODES_JSON=$(build_si_nodes_json) || return 1
+    export SI_NODES_JSON
+    configure_genai_setup || return 1
     print_info "Starting Docker Compose services..."
-    export SCENESCAPE_MQTT_BROKER
-    docker compose -f docker/compose.yaml up -d
-    if [ $? -eq 0 ]; then
-        sleep 5
-        print_success "SmartNVR services are starting up..."
-        print_info "UI will be available at: ${CYAN}http://${HOST_IP}:7860${NC}"
-    else
-        print_error "Docker Compose failed to start services."
-        return 1
-    fi
+    docker compose -f docker/compose.yaml up -d || { print_error "Docker Compose failed."; return 1; }
+    sleep 5
+    print_success "SmartNVR services are starting up..."
+    print_info "UI will be available at: ${CYAN}http://${HOST_IP}:7860${NC}"
 }
 
 stop_nvr_services() {
@@ -456,7 +509,8 @@ show_help() {
     echo -e "  ${RED}stop-streamer${NC}  - RTSP-only: stop MediaMTX streamer"
   echo -e "  ${GREEN}start-si${NC}       - Distributed Node System 1: start SI services (starts local RTSP streamer unless RTSP_STREAM_HOST is set)"
   echo -e "  ${RED}stop-si${NC}        - Distributed Node System 1: stop SI services (prompts to stop local RTSP streamer if running)"
-  echo -e "  ${GREEN}start-nvr${NC}      - Distributed Node System 2: start SmartNVR only (requires SCENESCAPE_MQTT_BROKER + RTSP_STREAM_HOST)"
+  echo -e "  ${GREEN}configure-si${NC}   - Distributed Node System 2: register SI nodes interactively (saves si-nodes.conf)"
+  echo -e "  ${GREEN}start-nvr${NC}      - Distributed Node System 2: start SmartNVR (reads si-nodes.conf; prompts if missing)"
   echo -e "  ${RED}stop-nvr${NC}       - Distributed Node System 2: stop SmartNVR"
     echo -e "  ${BLUE}help${NC}           - Display this help message"
     echo ""
@@ -512,6 +566,9 @@ case "$1" in
         ;;
     stop-si)
         stop_si_services
+        ;;
+    configure-si)
+        register_si_nodes
         ;;
     start-nvr)
         start_nvr_services
