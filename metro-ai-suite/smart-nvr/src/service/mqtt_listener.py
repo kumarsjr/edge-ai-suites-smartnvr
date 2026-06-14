@@ -67,7 +67,7 @@ def iso_to_frigate_timestamp(iso_timestamp: str) -> str:
         logger.warning(f"Failed to parse timestamp {iso_timestamp}: {e}")
         return iso_timestamp  
 
-# Per-camera throttle state: {camera_id: last_processed_timestamp}
+# Store last processed time for scenescape throttling
 throttle_state = {}
 
 def on_connect(client, userdata, flags, rc):
@@ -76,9 +76,9 @@ def on_connect(client, userdata, flags, rc):
             client.subscribe(MQTT_TOPIC)
             logger.info(f" Subscribed to Frigate topic: {MQTT_TOPIC}")
         elif userdata == "scenescape" or (isinstance(userdata, dict) and userdata.get("type") == "scenescape"):
-            client.subscribe(SCENESCAPE_MQTT_TOPIC, qos=1)
+            client.subscribe(SCENESCAPE_MQTT_TOPIC, qos=1)  # QoS 1 subscription
             node_id = userdata.get("node_id", "scenescape") if isinstance(userdata, dict) else "scenescape"
-            logger.info(f" Subscribed to SceneScape topic: {SCENESCAPE_MQTT_TOPIC} (node: {node_id})")
+            logger.info(f" Subscribed to Scenescape topic: {SCENESCAPE_MQTT_TOPIC} (node: {node_id})")
     else:
         logger.error(f" Failed to connect to MQTT broker ({userdata}), code: {rc}")
 
@@ -137,15 +137,15 @@ def on_message(client, userdata, msg):
             num_pedestrians = len(pedestrian_list)
             if num_vehicles <= 0 and num_pedestrians <= 0:
                 return
-
+            
             iso_timestamp = payload.get("timestamp", "")
-            logger.info(f" SceneScape raw timestamp: {iso_timestamp}")
+            logger.info(f" Scenescape raw timestamp: {iso_timestamp}")
             formatted_timestamp = iso_to_frigate_timestamp(iso_timestamp)
 
             start_time = float(formatted_timestamp) - 15
             end_time = float(formatted_timestamp) - 5
 
-            logger.info(f" SceneScape event: {msg.topic} | Camera: {scenescape_camera} | Vehicles: {num_vehicles} | Pedestrians: {num_pedestrians} | Timestamp: {formatted_timestamp} | Clip: {start_time}-{end_time} | Throttle: {SCENESCAPE_THROTTLE_INTERVAL}s")
+            logger.info(f" Scenescape event: {msg.topic} | Camera: {scenescape_camera} | Vehicles: {num_vehicles} | Pedestrians: {num_pedestrians} | Timestamp: {formatted_timestamp} | Clip: {start_time}-{end_time} | Throttle: {SCENESCAPE_THROTTLE_INTERVAL}s")
             process_scenescape_objects(objects, scenescape_camera, start_time, end_time, num_vehicles, num_pedestrians, msg.topic)
 
         else:
@@ -180,7 +180,7 @@ async def start_mqtt_clients():
         MQTT_PASSWORD,
         "frigate"
     )
-    logger.info(f" SceneScape enabled: {NVR_SCENESCAPE_ENABLED}, SI nodes: {len(SI_NODES)}")
+    logger.info(f" Scenescape is enabled {NVR_SCENESCAPE_ENABLED}, starting Scenescape MQTT client")
     if NVR_SCENESCAPE_ENABLED:
         if SI_NODES:
             # Multi-SI: one Paho client per SI node broker

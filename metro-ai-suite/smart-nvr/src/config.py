@@ -30,7 +30,7 @@ SI_NODES = json.loads(_si_nodes_raw) if _si_nodes_raw else []
 # Single-SI backward compatibility (used when SI_NODES_JSON is not set)
 SCENESCAPE_MQTT_BROKER = os.getenv("SCENESCAPE_MQTT_BROKER", os.getenv("HOST_IP", "broker"))
 SCENESCAPE_MQTT_PORT = int(os.getenv("SCENESCAPE_MQTT_PORT", 1883))
-SCENESCAPE_MQTT_TOPIC = os.getenv("SCENESCAPE_MQTT_TOPIC", "scenescape/data/camera/#")
+SCENESCAPE_MQTT_TOPIC = os.getenv("SCENESCAPE_MQTT_TOPIC", "scenescape/data/camera/#")  
 
 SCENESCAPE_MQTT_USER = os.getenv("SCENESCAPE_MQTT_USER")
 SCENESCAPE_MQTT_PASSWORD = os.getenv("SCENESCAPE_MQTT_PASSWORD")
