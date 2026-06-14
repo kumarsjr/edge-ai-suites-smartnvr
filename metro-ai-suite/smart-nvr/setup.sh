@@ -260,6 +260,7 @@ validate_environment() {
 # Function to start the services
 start_services() {
     print_header "Starting NVR Event Router Services"
+    unset SI_NODES_JSON
     HOST_IP=$(get_host_ip)
     export HOST_IP
     # Validate environment variables and exit if validation fails
@@ -329,8 +330,10 @@ register_si_nodes() {
     [[ "$n" =~ ^([1-9]|10)$ ]] || { print_error "Enter 1-10"; return 1; }
     printf '# node_id|mqtt_host|mqtt_port|rtsp_host|rtsp_port\n' > "$conf"
     for i in $(seq 1 "$n"); do
-        local ip; read -rp "SI node si${i} IP: " ip
-        printf 'si%d|%s|1883|%s|8554\n' "$i" "$ip" "$ip" >> "$conf"
+        local ip rtsp_ip
+        read -rp "SI node si${i} MQTT/SceneScape IP: " ip
+        read -rp "SI node si${i} RTSP stream IP [${ip}]: " rtsp_ip
+        printf 'si%d|%s|1883|%s|8554\n' "$i" "$ip" "${rtsp_ip:-$ip}" >> "$conf"
     done
     print_success "Saved $n SI node(s) to $conf"
 }
@@ -403,6 +406,7 @@ PY
 
 start_si_services() {
     print_header "Starting SI (System 1 / SI-only mode)"
+    unset SI_NODES_JSON
     if [ "${NVR_SCENESCAPE}" != "True" ] && [ "${NVR_SCENESCAPE}" != "true" ]; then
         print_error "start-si requires NVR_SCENESCAPE=true"
         print_info "Run: export NVR_SCENESCAPE=true"
